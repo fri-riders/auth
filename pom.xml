@@ -137,6 +137,11 @@
             <artifactId>kumuluzee-cors</artifactId>
             <version>${kumuluzee-cors.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>4.23</version>
+        </dependency>
     </dependencies>
 
     <build>

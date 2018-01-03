@@ -14,7 +14,7 @@ cache:
     - $HOME/.m2
 
 env:
-  - DOCKER_IMAGE=tomisebjanic/rso-auth:0.1
+  - DOCKER_IMAGE=tomisebjanic/rso-auth:0.2
 
 script:
   - mvn clean package -U
