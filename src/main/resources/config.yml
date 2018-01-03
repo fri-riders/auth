@@ -1,0 +1,39 @@
+kumuluzee:
+  name: auth
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    base-url: http://localhost:8083
+    http:
+      port: 8083
+  config:
+    start-retry-delay-ms: 500
+    max-retry-delay-ms: 900000
+    etcd:
+      hosts: http://localhost:8500
+  discovery:
+    ttl: 20
+    ping-interval: 15
+    etcd:
+      hosts: http://localhost:8500
+  health:
+    servlet:
+      mapping: /com.fri.rso.fririders.auth
+      enabled: true
+    logs:
+      enabled: true
+      level: INFO
+      period-s: 30
+    checks:
+      disk-space-health-check:
+        threshold: 100000000
+  cors-filter:
+    servlet:
+      allow-origin: "*"
+  metrics:
+    webinstrumentation:
+      - name: metricsEndpoint
+        url-pattern: /metrics/*
+      - name: authEndpoint
+        url-pattern: /v1/auth/*
