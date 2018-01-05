@@ -1,4 +1,4 @@
-package com.fri.rso.fririders.auth.resource;
+package com.fri.rso.fririders.auth.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
