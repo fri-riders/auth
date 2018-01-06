@@ -11,12 +11,12 @@ kumuluzee:
     start-retry-delay-ms: 500
     max-retry-delay-ms: 900000
     etcd:
-      hosts: http://localhost:8500
+      hosts: http://localhost:2379
   discovery:
     ttl: 20
     ping-interval: 15
     etcd:
-      hosts: http://localhost:8500
+      hosts: http://localhost:2379
   health:
     servlet:
       mapping: /health
