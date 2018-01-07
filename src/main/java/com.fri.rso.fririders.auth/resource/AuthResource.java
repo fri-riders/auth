@@ -1,5 +1,6 @@
 package com.fri.rso.fririders.auth.resource;
 
+import com.fri.rso.fririders.auth.config.ConfigProperties;
 import com.fri.rso.fririders.auth.entity.Jwt;
 import com.kumuluz.ee.logs.LogManager;
 import com.kumuluz.ee.logs.Logger;
@@ -9,8 +10,10 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,6 +31,9 @@ public class AuthResource {
 
     private static final Logger log = LogManager.getLogger(AuthResource.class.getName());
 
+    @Inject
+    private ConfigProperties config;
+
     private String issuer;
     private byte[] sharedSecret;
     private int validFor;
@@ -40,8 +46,11 @@ public class AuthResource {
 
     @POST
     @Path("issue")
+    @Timed(name = "issueToken_timer")
     public Response issueToken(Jwt incomingJwt) throws JOSEException {
         assert incomingJwt != null && incomingJwt.getEmail() != null;
+
+        if (!config.isHealthy()) throw new JOSEException("Service is not healthy");
 
         log.info("incomingJwt email = " + incomingJwt.getEmail());
 
@@ -74,10 +83,13 @@ public class AuthResource {
 
     @POST
     @Path("verify")
+    @Timed(name = "verifyToken_timer")
     public Response verifyToken(Jwt incomingJwt) throws ParseException, JOSEException {
         assert incomingJwt != null && incomingJwt.getEmail() != null;
 
         log.info("incomingJwt email = " + incomingJwt.getEmail());
+
+        if (!config.isHealthy()) throw new JOSEException("Service is not healthy");
 
         SignedJWT signedJWT = SignedJWT.parse(incomingJwt.getToken());
         JWSVerifier verifier = new MACVerifier(this.sharedSecret);
