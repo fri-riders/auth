@@ -10,9 +10,8 @@ services:
       KUMULUZEE_SERVER_BASEURL: http://auth:8089
     depends_on:
       - etcd
-
   users:
-    image: tomisebjanic/rso-users:1.0.1
+    image: tomisebjanic/rso-users:1.0.2
     ports:
       - 8082:8082
     environment:
@@ -31,7 +30,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: rsouser
-
   etcd:
     image: elcolio/etcd:2.0.10
     ports:
@@ -39,12 +37,4 @@ services:
       - 2380:2380
       - 4001:4001
       - 7001:7001
-  etcd-browser:
-    image: buddho/etcd-browser
-    ports:
-      - 8000:8000
-    environment:
-      ETCD_HOST: http://etcd
-      AUTH_PASS: doe
-    depends_on:
-      - etcd
+    entrypoint: ["/bin/run.sh", "-cors \"*\""]
