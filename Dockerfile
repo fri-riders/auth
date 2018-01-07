@@ -6,6 +6,6 @@ WORKDIR /app
 
 ADD ./target/auth-1.0-SNAPSHOT.jar /app
 
-EXPOSE 8083
+EXPOSE 8089
 
 CMD ["java", "-jar", "auth-1.0-SNAPSHOT.jar"]

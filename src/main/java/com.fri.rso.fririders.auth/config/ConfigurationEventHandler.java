@@ -13,14 +13,14 @@ public class ConfigurationEventHandler {
 
     public void init(@Observes @Initialized(ApplicationScoped.class) Object init) {
 
-        ConfigurationUtil.getInstance().subscribe("auth-config.healthy", (String key, String value) -> {
-            if ("auth-config.healthy".equals(key)) {
-                if ("true".equals(value.toLowerCase())) {
-                    log.info("Service IS healthy.");
-                } else {
-                    log.info("Service is NOT healthy.");
-                }
-            }
-        });
+//        ConfigurationUtil.getInstance().subscribe("auth-config.healthy", (String key, String value) -> {
+//            if ("auth-config.healthy".equals(key)) {
+//                if ("true".equals(value.toLowerCase())) {
+//                    log.info("Service IS healthy.");
+//                } else {
+//                    log.info("Service is NOT healthy.");
+//                }
+//            }
+//        });
     }
 }

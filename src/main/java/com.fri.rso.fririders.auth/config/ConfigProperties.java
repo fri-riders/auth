@@ -9,7 +9,6 @@ import javax.enterprise.context.ApplicationScoped;
 @ConfigBundle("auth-config")
 public class ConfigProperties {
 
-    @ConfigValue(watch = true)
     private boolean healthy;
 
     public boolean isHealthy() {

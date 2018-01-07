@@ -5,7 +5,7 @@
 1. Build app: `mvn clean package`
 1. Run: `docker-compose up --build`
 
-App is accessible on port `8083`
+App is accessible on port `8089`
 
 # Registered endpoints
 ## Auth

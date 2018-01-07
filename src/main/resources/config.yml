@@ -4,9 +4,9 @@ kumuluzee:
   env:
     name: dev
   server:
-    base-url: http://localhost:8083
+    base-url: http://localhost:8089
     http:
-      port: 8083
+      port: 8089
   config:
     start-retry-delay-ms: 500
     max-retry-delay-ms: 900000

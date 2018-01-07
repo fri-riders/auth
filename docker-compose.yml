@@ -3,11 +3,11 @@ services:
   auth:
     build: .
     ports:
-      - 8083:8083
+      - 8089:8089
     environment:
       KUMULUZEE_CONFIG_ETCD_HOSTS: http://etcd:2379
       KUMULUZEE_DISCOVERY_ETCD_HOSTS: http://etcd:2379
-      KUMULUZEE_SERVER_BASEURL: http://auth:8083
+      KUMULUZEE_SERVER_BASEURL: http://auth:8089
     depends_on:
       - etcd
 
