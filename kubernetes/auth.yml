@@ -10,7 +10,7 @@ spec:
         app: auth
     spec:
       containers:
-      - image: tomisebjanic/rso-auth:1.0.4
+      - image: tomisebjanic/rso-auth:1.0.5
         name: auth
         env:
           - name: KUMULUZEE_DISCOVERY_CLUSTER

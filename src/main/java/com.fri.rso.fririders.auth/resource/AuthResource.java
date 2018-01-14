@@ -47,10 +47,12 @@ public class AuthResource {
     @POST
     @Path("issue")
     @Timed(name = "issueToken_timer")
-    public Response issueToken(Jwt incomingJwt) throws JOSEException {
+    public Response issueToken(Jwt incomingJwt) throws JOSEException, InterruptedException {
         assert incomingJwt != null && incomingJwt.getEmail() != null;
 
-        if (!config.isHealthy()) throw new JOSEException("Service is not healthy");
+        if (!config.isHealthy()) {
+            Thread.sleep(2000);
+        }
 
         log.info("incomingJwt email = " + incomingJwt.getEmail());
 
@@ -84,12 +86,14 @@ public class AuthResource {
     @POST
     @Path("verify")
     @Timed(name = "verifyToken_timer")
-    public Response verifyToken(Jwt incomingJwt) throws ParseException, JOSEException {
+    public Response verifyToken(Jwt incomingJwt) throws ParseException, JOSEException, InterruptedException {
         assert incomingJwt != null && incomingJwt.getEmail() != null;
 
         log.info("incomingJwt email = " + incomingJwt.getEmail());
 
-        if (!config.isHealthy()) throw new JOSEException("Service is not healthy");
+        if (!config.isHealthy()) {
+            Thread.sleep(2000);
+        }
 
         SignedJWT signedJWT = SignedJWT.parse(incomingJwt.getToken());
         JWSVerifier verifier = new MACVerifier(this.sharedSecret);
